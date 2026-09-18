@@ -7,7 +7,33 @@ void main() throws SQLException {
     String password = "2706";
 
     Connection connection = DriverManager.getConnection(url, user, password);
-    createTable(connection);
+//    createTable(connection);
+
+//    insertTable(connection);
+
+    String sqlSelect = "SELECT * FROM TB_BOOK";
+    try (PreparedStatement statement= connection.prepareStatement(sqlSelect)){
+
+        ResultSet resultSet = statement.executeQuery();
+        while (resultSet.next()){
+            System.out.println(resultSet.getString(2));
+
+        }
+    }
+
+}
+
+private void insertTable(Connection connection) throws SQLException {
+    String query = "INSERT INTO TB_BOOK (id,title,author,available)" +
+            "VALUES (?,?,?,?)";
+    try (PreparedStatement statement = connection.prepareStatement(query)) {
+        statement.setInt(1, 6);
+        statement.setString(2, "Screen Shot");
+        statement.setString(3, "Neda");
+        statement.setBoolean(4, true);
+
+        int resultSet = statement.executeUpdate();
+    }
 }
 
 
@@ -35,7 +61,7 @@ private static void createTable(Connection connection) throws SQLException {
     }
 
 
-    query = "        CREATE TABLE IF NOT EXISTS loan " +
+    query = "CREATE TABLE IF NOT EXISTS loan " +
             "(id SERIAL PRIMARY KEY,           " +
             " loan_date DATE NOT NULL,            " +
             "return_date DATE NOT NULL,            " +
