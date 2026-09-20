@@ -2,11 +2,8 @@ import java.sql.*;
 
 void main() throws SQLException {
 
-    String url = "jdbc:postgresql://localhost:5432/library_management";
-    String user = "postgres";
-    String password = "2706";
+    Connection connection = ConnectionUtil.getConnection();
 
-    Connection connection = DriverManager.getConnection(url, user, password);
 //    createTable(connection);
 
 //    insertTable(connection);
