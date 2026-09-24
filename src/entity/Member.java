@@ -3,20 +3,21 @@ package entity;
 public class Member {
 
     private int id;
-    private String name;
+    private String username;
     private String tel;
     private String address;
     private String email;
 
-    @Override
-    public String toString() {
-        return "Member{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", tel='" + tel + '\'' +
-                ", address='" + address + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+    public Member() {
+
+    }
+
+    public Member(int id, String username, String tel, String address, String email) {
+        this.id = id;
+        this.username = username;
+        this.tel = tel;
+        this.address = address;
+        this.email = email;
     }
 
     public int getId() {
@@ -27,12 +28,12 @@ public class Member {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getTel() {
@@ -59,11 +60,14 @@ public class Member {
         this.email = email;
     }
 
-    public Member(int id, String name, String tel, String address, String email) {
-        this.id = id;
-        this.name = name;
-        this.tel = tel;
-        this.address = address;
-        this.email = email;
+    @Override
+    public String toString() {
+        return "Member{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", tel='" + tel + '\'' +
+                ", address='" + address + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 }
