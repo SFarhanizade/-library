@@ -11,7 +11,7 @@ public class MemberRepository {
 
 
     public void save(Member member) {
-        String insertQuery = "INSERT INTO member (id, name, tel, address, email) VALUES (?,?,?,?,?)";
+        String insertQuery = "INSERT INTO member (id, username, tel, address, email) VALUES (?,?,?,?,?)";
         try (Connection connection = ConnectionUtil.getConnection();
              PreparedStatement pS = connection.prepareStatement(insertQuery)) {
 
@@ -29,9 +29,11 @@ public class MemberRepository {
     }
 
     public Member findById(int id) {
-        String findQuery = "SELECT id, name, tel, address, email FROM member WHERE id = ?";
-        try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement pS = connection.prepareStatement(findQuery)) {
+        String findQuery = "SELECT id, username, tel, address, email FROM member WHERE id = ?";
+
+        try (Connection connection = ConnectionUtil.getConnection()) {
+
+            PreparedStatement pS = connection.prepareStatement(findQuery);
 
             pS.setInt(1, id);
 
@@ -49,10 +51,11 @@ public class MemberRepository {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return null;
     }
 
     public void update(Member member) {
-        String updateQuery = "UPDATE member set name = ?, tel = ?, address = ?, email = ? WHERE id = ?";
+        String updateQuery = "UPDATE member SET username = ?, tel = ?, address = ?, email = ? WHERE id = ?";
         try (Connection connection = ConnectionUtil.getConnection();
              PreparedStatement pS = connection.prepareStatement(updateQuery)) {
 
@@ -69,7 +72,7 @@ public class MemberRepository {
     }
 
     public List<Member> findAll() {
-        String findQuery = "SELECT id, name, tel, address, email FROM member";
+        String findQuery = "SELECT id, username, tel, address, email FROM member";
 
         try (Connection connection = ConnectionUtil.getConnection();
              Statement pS = connection.createStatement()) {
