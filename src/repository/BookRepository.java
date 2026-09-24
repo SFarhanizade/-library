@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BookRepository {
 
@@ -57,18 +59,36 @@ public class BookRepository {
         return null;
     }
 
-    public void delete(Book book) {
-
-        String deleteQuery = "DELETE FROM book WHERE id = ?";
-
+    public void deleteById(int id) {
+        String deleteQuary = "Delete from books where id=?";
         try (Connection connection = ConnectionUtil.getConnection()) {
-
-            PreparedStatement pS = connection.prepareStatement(deleteQuery);
-
-            pS.setInt(1, book.getId());
-            pS.executeUpdate();
-
+            PreparedStatement statement = connection.prepareStatement((deleteQuary));
+            statement.setInt(1, id);
+            statement.executeUpdate();
         } catch (SQLException e) {
+            throw new RuntimeException();
+        }
+
+
+    }
+    public List<Book> findALL(){
+        List<Book> books=new ArrayList<>();
+        String findAllBooks="SELECT * FROM book";
+        try(Connection connection=ConnectionUtil.getConnection()){
+            PreparedStatement statement= connection.prepareStatement(findAllBooks);
+            ResultSet resultSet= statement.executeQuery();
+            while (resultSet.next()){
+                Book book=new Book(
+                        resultSet.getInt("id"),
+                        resultSet.getString("title"),
+                        resultSet.getString("auther"),
+                        resultSet.getBoolean("avalable"));
+                books.add(book);
+
+            }
+            return books;
+
+        }catch (SQLException e){
             throw new RuntimeException();
         }
     }
