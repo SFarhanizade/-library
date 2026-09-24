@@ -1,21 +1,20 @@
 package entity;
 
-
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class Loan {
-private int id;
-private int  bookId;
-private int memberId;
-private LocalDateTime loandate;
-private LocalDateTime returndate;
+    private int id;
+    private int bookId;
+    private int memberId;
+    private LocalDate loanDate;
+    private LocalDate returnDate;
 
-    public Loan(int id, int book_id, int member_id, LocalDateTime loan_date, LocalDateTime returnDate) {
+    public Loan(int id, int bookId, int memberId, LocalDate loanDate, LocalDate returnDate) {
         this.id = id;
-        this.bookId = book_id;
-        this.memberId = member_id;
-        this.loandate = loan_date;
-        this.returndate = returnDate;
+        this.bookId = bookId;
+        this.memberId = memberId;
+        this.loanDate = loanDate;
+        this.returnDate = returnDate;
     }
 
     public int getId() {
@@ -26,36 +25,36 @@ private LocalDateTime returndate;
         this.id = id;
     }
 
-    public int getBook_id() {
+    public int getBookId() {
         return bookId;
     }
 
-    public void setBook_id(int book_id) {
-        this.bookId = book_id;
+    public void setBookId(int book_id) {
+        this.bookId = bookId;
     }
 
-    public int getMember_id() {
+    public int getMemberId() {
         return memberId;
     }
 
-    public void setMember_id(int member_id) {
-        this.memberId = member_id;
+    public void setMemberId(int member_id) {
+        this.memberId = memberId;
     }
 
-    public LocalDateTime getLoan_date() {
-        return loandate;
+    public LocalDate getLoanDate() {
+        return loanDate;
     }
 
-    public void setLoan_date(LocalDateTime loan_date) {
-        this.loandate = loan_date;
+    public void setLoanDate(LocalDate loan_date) {
+        this.loanDate = loanDate;
     }
 
-    public LocalDateTime getReturnDate() {
-        return returndate;
+    public LocalDate getReturnDate() {
+        return returnDate;
     }
 
-    public void setReturnDate(LocalDateTime returnDate) {
-        this.returndate = returnDate;
+    public void setReturnDate(LocalDate returnDate) {
+        this.returnDate = returnDate;
     }
 
     @Override
@@ -64,8 +63,8 @@ private LocalDateTime returndate;
                 "id=" + id +
                 ", book_id=" + bookId +
                 ", member_id=" + memberId +
-                ", loan_date=" +  loandate+
-                ", returnDate=" + returndate +
+                ", loan_date=" + loanDate +
+                ", returnDate=" + returnDate +
                 '}';
     }
 }
