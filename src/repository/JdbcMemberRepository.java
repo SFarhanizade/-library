@@ -12,15 +12,14 @@ public class JdbcMemberRepository implements MemberRepository {
 
     @Override
     public void save(Member member) {
-        String insertQuery = "INSERT INTO member (id, username, tel, address, email) VALUES (?,?,?,?,?)";
+        String insertQuery = "INSERT INTO member (username, tel, address, email) VALUES (?,?,?,?)";
         try (Connection connection = ConnectionUtil.getConnection();
              PreparedStatement pS = connection.prepareStatement(insertQuery)) {
 
-            pS.setInt(1, member.getId());
-            pS.setString(2, member.getName());
-            pS.setString(3, member.getTel());
-            pS.setString(4, member.getAddress());
-            pS.setString(5, member.getEmail());
+            pS.setString(1, member.getUsername());
+            pS.setString(2, member.getTel());
+            pS.setString(3, member.getAddress());
+            pS.setString(4, member.getEmail());
             pS.executeUpdate();
 
 
@@ -43,11 +42,11 @@ public class JdbcMemberRepository implements MemberRepository {
 
             if (rs.next()) {
                 int memberId = rs.getInt("id");
-                String name = rs.getString("name");
+                String username = rs.getString("username");
                 String tel = rs.getString("tel");
                 String address = rs.getString("address");
                 String email = rs.getString("email");
-                return new Member(memberId, name, tel, address, email);
+                return new Member(memberId, username, tel, address, email);
             }
 
         } catch (SQLException e) {
@@ -62,7 +61,7 @@ public class JdbcMemberRepository implements MemberRepository {
         try (Connection connection = ConnectionUtil.getConnection();
              PreparedStatement pS = connection.prepareStatement(updateQuery)) {
 
-            pS.setString(1, member.getName());
+            pS.setString(1, member.getUsername());
             pS.setString(2, member.getTel());
             pS.setString(3, member.getAddress());
             pS.setString(4, member.getEmail());
@@ -85,11 +84,11 @@ public class JdbcMemberRepository implements MemberRepository {
             var members = new ArrayList<Member>();
             while (rs.next()) {
                 int memberId = rs.getInt("id");
-                String name = rs.getString("name");
+                String username = rs.getString("username");
                 String tel = rs.getString("tel");
                 String address = rs.getString("address");
                 String email = rs.getString("email");
-                members.add(new Member(memberId, name, tel, address, email));
+                members.add(new Member(memberId, username, tel, address, email));
             }
 
             return members;
