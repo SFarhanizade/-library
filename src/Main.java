@@ -1,10 +1,10 @@
-import repository.MemberRepository;
+import repository.JdbcMemberRepository;
 
 import java.sql.SQLException;
 
 static void main(String[] args) throws SQLException {
 
-    MemberRepository memberRepository = new MemberRepository();
+    JdbcMemberRepository memberRepository = new JdbcMemberRepository();
 
     IO.println(memberRepository.findById(1));
     }
