@@ -61,6 +61,33 @@ public class JdbcBookRepository implements BookRepository {
         return null;
     }
 
+    public Book findById (int id){
+
+        String findQuery = "SELECT id, title, author, available FROM book WHERE id = ?";
+
+        try (Connection connection = ConnectionUtil.getConnection()) {
+
+            PreparedStatement pS = connection.prepareStatement(findQuery);
+
+            pS.setInt(1, id);
+
+            ResultSet resultSet = pS.executeQuery();
+
+            if (resultSet.next()) {
+
+                int bookId = resultSet.getInt("id");
+                String titleBook = resultSet.getString("title");
+                String author = resultSet.getString("author");
+                boolean available = resultSet.getBoolean("available");
+
+                return new Book(id, titleBook, author, available);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException();
+        }
+        return null;
+    }
+
     @Override
     public void update(Book book) {
 
