@@ -14,4 +14,6 @@ public interface MemberRepository {
     List<Member> findAll();
 
     void delete(Member member);
+
+    int count();
 }

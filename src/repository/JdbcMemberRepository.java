@@ -110,5 +110,23 @@ public class JdbcMemberRepository implements MemberRepository {
         }
     }
 
+    @Override
+    public int count() {
+        String countQuery = "SELECT count(*) as count FROM member";
+
+        try (Connection connection = ConnectionUtil.getConnection();
+             Statement pS = connection.createStatement()) {
+
+            ResultSet rs = pS.executeQuery(countQuery);
+            if (rs.next()) {
+                return rs.getInt("count");
+            }
+
+            return 0;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
 
