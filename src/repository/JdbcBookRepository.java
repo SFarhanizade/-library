@@ -15,7 +15,7 @@ public class JdbcBookRepository implements BookRepository {
     @Override
     public void save(Book book) {
 
-        String addQuery = "INSERT INTO book (title , author, available) VALUES (?, ?, ?)";
+        String addQuery = "INSERT INTO tb_book (title , author, available) VALUES (?, ?, ?)";
 
         try (Connection connection = ConnectionUtil.getConnection()) {
 
@@ -36,7 +36,7 @@ public class JdbcBookRepository implements BookRepository {
     @Override
     public Book findByTitle(String title) {
 
-        String updateQuery = "SELECT id, title, author, available FROM book WHERE title = ?";
+        String updateQuery = "SELECT id, title, author, available FROM tb_book WHERE title = ?";
 
         try (Connection connection = ConnectionUtil.getConnection()) {
 
@@ -91,7 +91,7 @@ public class JdbcBookRepository implements BookRepository {
     @Override
     public void update(Book book) {
 
-        String updateQuery = "UPDATE book SET  title = ?, author = ?, available = ? WHERE id = ?";
+        String updateQuery = "UPDATE tb_book SET  title = ?, author = ?, available = ? WHERE id = ?";
 
         try (Connection connection = ConnectionUtil.getConnection()) {
             PreparedStatement ps = connection.prepareStatement(updateQuery);
@@ -113,7 +113,7 @@ public class JdbcBookRepository implements BookRepository {
 
         List<Book> books = new ArrayList<>();
 
-        String findAllBooks = "SELECT * FROM book";
+        String findAllBooks = "SELECT * FROM tb_book";
 
         try (Connection connection = ConnectionUtil.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(findAllBooks);

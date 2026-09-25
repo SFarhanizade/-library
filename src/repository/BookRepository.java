@@ -17,4 +17,6 @@ public interface BookRepository {
     void delete(Book book);
 
     void deleteById(int id);
+
+    Book findById(int id);
 }

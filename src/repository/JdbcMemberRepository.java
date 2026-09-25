@@ -12,7 +12,7 @@ public class JdbcMemberRepository implements MemberRepository {
 
     @Override
     public void save(Member member) {
-        String insertQuery = "INSERT INTO member (username, tel, address, email) VALUES (?,?,?,?)";
+        String insertQuery = "INSERT INTO tb_member (username, tel, address, email) VALUES (?,?,?,?)";
         try (Connection connection = ConnectionUtil.getConnection();
              PreparedStatement pS = connection.prepareStatement(insertQuery)) {
 
@@ -30,7 +30,7 @@ public class JdbcMemberRepository implements MemberRepository {
 
     @Override
     public Member findById(int id) {
-        String findQuery = "SELECT id, username, tel, address, email FROM member WHERE id = ?";
+        String findQuery = "SELECT id, username, tel, address, email FROM tb_member WHERE id = ?";
 
         try (Connection connection = ConnectionUtil.getConnection()) {
 
@@ -57,7 +57,7 @@ public class JdbcMemberRepository implements MemberRepository {
 
     @Override
     public void update(Member member) {
-        String updateQuery = "UPDATE member SET username = ?, tel = ?, address = ?, email = ? WHERE id = ?";
+        String updateQuery = "UPDATE tb_member SET username = ?, tel = ?, address = ?, email = ? WHERE id = ?";
         try (Connection connection = ConnectionUtil.getConnection();
              PreparedStatement pS = connection.prepareStatement(updateQuery)) {
 
@@ -75,7 +75,7 @@ public class JdbcMemberRepository implements MemberRepository {
 
     @Override
     public List<Member> findAll() {
-        String findQuery = "SELECT id, username, tel, address, email FROM member";
+        String findQuery = "SELECT id, username, tel, address, email FROM tb_member";
 
         try (Connection connection = ConnectionUtil.getConnection();
              Statement pS = connection.createStatement()) {
@@ -99,7 +99,7 @@ public class JdbcMemberRepository implements MemberRepository {
 
     @Override
     public void delete(Member member) {
-        String deleteQuery = "DELETE FROM member WHERE id = ?";
+        String deleteQuery = "DELETE FROM tb_member WHERE id = ?";
         try (Connection connection = ConnectionUtil.getConnection();
              PreparedStatement pS = connection.prepareStatement(deleteQuery)) {
 
