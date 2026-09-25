@@ -29,7 +29,7 @@ public class BookService {
         newbook.setTitle(title);
         newbook.setAvailable(available);
 
-        bookRepository.add(newbook);
+        bookRepository.save(newbook);
 
     }
 }
